@@ -11,6 +11,7 @@ class FacebookDataIngestSource:
     self.config = config
     self.pages = []
     self.post = []
+    self.index = 0
     
   def __iter__(self):
     if 'track' in self.config:
@@ -48,13 +49,14 @@ class FacebookDataIngestSource:
 
         for i in range(len(request)):
             self.post.append((page[1],request))
-    self.source_iterator = ifilter(lambda x: x, self.post.iter_lines() )
-    pprint(self.source_iterator)
+
     return self
 
   def next(self):
-    pprint({'post' : json.loads(self.source_iterator.next())} ) 
-    return {'post' : json.loads(self.source_iterator.next())} 
+    if self.index < len(self.post):
+        self.source_iterator = self.post[self.index]
+        pprint(self.source_iterator)
+        return {'post' : json.loads(self.source_iterator)}
     
 
 
