@@ -24,7 +24,7 @@ class TwitterDataIngestSource:
 
     request = auth.post(
       'https://stream.twitter.com/1.1/statuses/filter.json',
-      languages=["es"], data = 'track=' + self.track,
+       data = 'track=' + self.track,
       stream = True
     )
 
