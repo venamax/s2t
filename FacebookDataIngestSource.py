@@ -2,6 +2,7 @@ import sys
 from itertools import ifilter
 import requests
 import json
+from pprint import pprint
 
 class FacebookDataIngestSource:
   """Ingest data from Facebook"""
@@ -44,8 +45,9 @@ class FacebookDataIngestSource:
     for page in self.pages:
         video_url = 'https://graph.facebook.com/v2.5/%s/videos?&fields=permalink_url,sharedposts,likes,comments&access_token=%s'%(page[0],self.access_token)
         request = requests.get(video_url).json()
-        for i in range(len(request['data'])):
-            self.post.append(request['data'])
+        request.pprint()
+        for i in range(len(request)):
+            self.post.append(request)
     self.source_iterator = ifilter(lambda x: x, self.pages.iter_lines() + (self.post.iter_lines(),) )
     
     return self
