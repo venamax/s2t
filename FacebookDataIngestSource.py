@@ -12,10 +12,10 @@ class FacebookDataIngestSource:
     self.post = []
     
   def __iter__(self):
-      if 'track' in self.config:
-          self.track = self.config['track']
-      else: 
-          self.track = ['ski','surf','board']
+    if 'track' in self.config:
+        self.track = self.config['track']
+    else: 
+        self.track = ['ski','surf','board']
     
 #### Retrieve the consumer key and secret
     consumer_key = self.config['consumer_key']
