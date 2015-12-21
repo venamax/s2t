@@ -47,8 +47,8 @@ class FacebookDataIngestSource:
         request = requests.get(video_url).json()
 
         for i in range(len(request)):
-            self.post.append(request)
-    self.source_iterator = ifilter(lambda x: x, self.pages.iter_lines() + (self.post.iter_lines(),) )
+            self.post.append((page[1],request))
+    self.source_iterator = ifilter(lambda x: x, self.post.iter_lines() )
     pprint(self.source_iterator)
     return self
 
