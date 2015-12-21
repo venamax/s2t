@@ -2,6 +2,7 @@ import argparse
 import ConfigParser
 
 import TwitterDataIngestSource
+import FacebookDataIngestSource
 import S3DataIngestSource
 import LocalDataIngestSource
 
