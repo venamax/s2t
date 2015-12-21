@@ -49,6 +49,7 @@ class FacebookDataIngestSource:
 
         for i in range(len(request)):
             self.post.append((page[1],request))
+            pprint((page[1],request))
 
     return self
 
@@ -56,7 +57,10 @@ class FacebookDataIngestSource:
     if self.index < len(self.post):
         self.source_iterator = self.post[self.index]
         pprint(self.source_iterator)
+        self.index = self.index + 1
         return {'post' : json.loads(self.source_iterator)}
+    else:
+        raise StopIteration()
     
 
 
