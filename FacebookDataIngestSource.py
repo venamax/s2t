@@ -49,7 +49,7 @@ class FacebookDataIngestSource:
         for i in range(len(request)):
             self.post.append(request)
     self.source_iterator = ifilter(lambda x: x, self.pages.iter_lines() + (self.post.iter_lines(),) )
-    
+    pprint(self.source_iterator)
     return self
 
   def next(self):
