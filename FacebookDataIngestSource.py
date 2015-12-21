@@ -45,7 +45,7 @@ class FacebookDataIngestSource:
     for page in self.pages:
         video_url = 'https://graph.facebook.com/v2.5/%s/videos?&fields=permalink_url,sharedposts,likes,comments&access_token=%s'%(page[0],self.access_token)
         request = requests.get(video_url).json()
-        pprint(request)
+
         for i in range(len(request)):
             self.post.append(request)
     self.source_iterator = ifilter(lambda x: x, self.pages.iter_lines() + (self.post.iter_lines(),) )
@@ -53,6 +53,7 @@ class FacebookDataIngestSource:
     return self
 
   def next(self):
+    pprint({'post' : json.loads(self.source_iterator.next())} ) 
     return {'post' : json.loads(self.source_iterator.next())} 
     
 
