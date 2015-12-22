@@ -17,7 +17,7 @@ class FacebookDataIngestSource:
     if 'track' in self.config:
         self.track = self.config['track']
     else: 
-        self.track = ['ski','surf','board']
+        self.track = ['Venezuela']
     
 #### Retrieve the consumer key and secret
     consumer_key = self.config['consumer_key']
