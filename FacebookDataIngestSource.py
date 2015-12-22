@@ -49,7 +49,7 @@ class FacebookDataIngestSource:
 
         for i in range(len(request)):
             self.post.update({page[1] : request})
-
+            print "Updating record:", i
     return self
 
   def next(self):
