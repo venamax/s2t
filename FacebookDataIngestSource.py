@@ -60,6 +60,7 @@ class FacebookDataIngestSource:
         self.index = self.index + 1
     else:
         raise StopIteration()
+        
     
 
 
