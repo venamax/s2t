@@ -10,7 +10,7 @@ class FacebookDataIngestSource:
   def __init__(self, config):
     self.config = config
     self.pages = []
-    self.post = []
+    self.post = {}
     self.index = 0
     
   def __iter__(self):
@@ -48,8 +48,7 @@ class FacebookDataIngestSource:
         request = requests.get(video_url).json()
 
         for i in range(len(request)):
-            self.post.append((page[1],request))
-            pprint((page[1],request))
+            self.post.update({page[1] : request})
 
     return self
 
