@@ -46,12 +46,12 @@ class FacebookDataIngestSource:
     for page in self.pages:
         video_url = 'https://graph.facebook.com/v2.5/%s/videos?&fields=permalink_url,sharedposts,likes,comments&access_token=%s'%(page[0],self.access_token)
         request = requests.get(video_url).json()
-        print "Number of requests:", len(request)
+        print "Number of requests:", len(request['data'])
         
-        for i in range(len(request)):
-            self.post.update({page[1] : json.loads(request)})
+        for i in range(len(request['data'])):
+            self.post.update({page[1] : request['data'][i]})
             print "Updating records from page:", page[1]
-            pprint({page[1] : json.loads(request)})
+            pprint({page[1] : request['data'][i]})
     return self
 
   def next(self):
