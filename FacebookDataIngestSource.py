@@ -57,7 +57,7 @@ class FacebookDataIngestSource:
 
   def next(self):
     if self.index < len(self.post):
-        return {'post' : json.loads(self.post[self.index])}
+        return {'post' : self.post[self.index]}
         self.index = self.index + 1
     else:
         raise StopIteration()
