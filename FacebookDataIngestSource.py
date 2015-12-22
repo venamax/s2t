@@ -49,7 +49,8 @@ class FacebookDataIngestSource:
 
         for i in range(len(request)):
             self.post.update({page[1] : request})
-            print "Updating records from page:", page
+            print "Updating records from page:", page[1]
+            pprint({page[1] : request})
     return self
 
   def next(self):
