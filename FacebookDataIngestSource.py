@@ -53,14 +53,17 @@ class FacebookDataIngestSource:
             for i in range(len(request['data'])):
                 self.post.update({page[1] : request['data'][i]})
     
-    pprint(self.post[:50])
     return self
 
   def next(self):
-    if self.index < len(self.post):
-        post = self.post[self.index]
+    if self.index < len(self.pages):
+        page = self.pages[self.index]
+        print "Page name:", page
         self.index = self.index + 1
-        return {'post' : post.json()}
+        for i in range(len(self.post[page])):
+            post = self.post[page][i]
+            pprint(post)
+            return {'post' : {page : post}}
     else:
         raise StopIteration()
         
