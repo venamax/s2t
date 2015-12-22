@@ -57,7 +57,7 @@ class FacebookDataIngestSource:
 
   def next(self):
     if self.index < len(self.pages):
-        page = self.pages[self.index]
+        page = self.pages[self.index][1]
         print "Page name:", page
         self.index = self.index + 1
         for i in range(len(self.post[page])):
