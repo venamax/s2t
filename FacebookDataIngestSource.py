@@ -52,7 +52,8 @@ class FacebookDataIngestSource:
         
             for i in range(len(request['data'])):
                 self.post.update({page[1] : request['data'][i]})
-                pprint({page[1] : request['data'][i]})
+    
+    pprint(self.post[:50])
     return self
 
   def next(self):
