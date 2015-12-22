@@ -10,14 +10,14 @@ class FacebookDataIngestSource:
   def __init__(self, config):
     self.config = config
     self.pages = []
-    self.post = {}
+    self.post = []
     self.index = 0
     
   def __iter__(self):
     if 'track' in self.config:
         self.track = self.config['track']
     else: 
-        self.track = ['Trix & Trax']
+        self.track = ['trixandtrax']
     
 #### Retrieve the consumer key and secret
     consumer_key = self.config['consumer_key']
@@ -51,19 +51,16 @@ class FacebookDataIngestSource:
             print "Number of videos published:", len(request['data'])
         
             for i in range(len(request['data'])):
-                self.post.update({page[1] : request['data'][i]})
+                self.post.append((page[1], request['data'][i]))
     
     return self
 
   def next(self):
-    if self.index < len(self.pages):
-        page = self.pages[self.index][1]
-        print "Page name:", page
+    if self.index < len(self.post):
+        post = self.post[self.index]
         self.index = self.index + 1
-        for i in range(len(self.post[page])):
-            post = self.post[page][i]
-            pprint(post)
-            return {'post' : {page : post}}
+        pprint(post)
+        return {'post' : {post[0] : post[1]}}
     else:
         raise StopIteration()
         
