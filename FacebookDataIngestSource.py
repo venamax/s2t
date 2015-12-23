@@ -60,7 +60,7 @@ class FacebookDataIngestSource:
         post = self.post[self.index]
         self.index = self.index + 1
         pprint(post)
-        return {'post' : {'page': post[0], post[1]}}
+        return {'post' : {'page': post[0], 'data': post[1]}}
     else:
         raise StopIteration()
         
