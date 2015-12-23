@@ -64,7 +64,7 @@ class PostgresDataIngestSink:
 
               sys.stdout.write('.') # write a record indicator to stdout
               
-          elif: 'post' in source
+          elif 'post' in source:
               pass
          except:
               sys.stdout.write('*')
