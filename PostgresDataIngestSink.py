@@ -66,13 +66,13 @@ class PostgresDataIngestSink:
               
           elif 'post' in source:
               pass
-         except:
-              sys.stdout.write('*')
+      except:
+          sys.stdout.write('*')
 
-          sys.stdout.flush()
-          self.records_written = self.records_written + 1
+      sys.stdout.flush()
+      self.records_written = self.records_written + 1
 
-          if self.records_written % self.batch_size == 0:
+      if self.records_written % self.batch_size == 0:
               print('|')
 
       #raise ValueError('time to stop')
