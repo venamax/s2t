@@ -65,7 +65,49 @@ class PostgresDataIngestSink:
               sys.stdout.write('.') # write a record indicator to stdout
               
           elif 'post' in source:
-              pass
+              post = [ item ]
+              
+              page = post['post']['page']
+              urls = post['post']['data']['permalink_url']
+              pageid = post['post']['data']['id']
+              
+              
+              if 'likes' in post:
+                  likes_count = len(post['post']['data']['likes']['data'])
+              else:
+                  likes_cout = 0
+              
+              if 'comments' in post:
+                  comments_count = len(post['post']['data']['comments']['data'])
+                  engagement_times.append(post['post']['data']['comments']['data'][i]['created_time'] for i in range(comments_count))
+              else:
+                  comments_count = 0
+
+              if 'sharedposts' in post:
+                  shares_count = len(post['post']['data']['sharedposts']['data'])
+                  engagement_times.append(post['post']['data']['sharedposts']['data'][i]['created_time'] for i in range(shares_count))
+                  
+              else:
+                  shares_count = 0              
+              
+              createds = [time.strftime('%Y-%m-%d %H:%M:%S',
+              time.strptime(str(engagement_times),
+                  '%a %b %d %H:%M:%S +0000 %Y'))                  for i in range(len(engagement_times))]
+              last_engagement = max(createds)
+
+              df = pd.DataFrame(
+                 {'engaged_at':last_engagement, 'pageid':pageid, 'page':page,
+                 'likes_count':likes_count, 'comments_count':comments_count,
+                     'shares_count': shares_count, 'urls': urls},
+              columns=['engaged_at','pageid','page', 'likes_count','comments_count', 'shares_count', 'urls']
+                )
+
+        #print 'Read: ' + str(df)
+
+              df.to_sql(self.table_name, self.engine, if_exists = 'append')
+
+
+              sys.stdout.write('.') # write a record indicator to stdout              
       except:
           sys.stdout.write('*')
 
