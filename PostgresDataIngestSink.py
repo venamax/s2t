@@ -104,7 +104,7 @@ class PostgresDataIngestSink:
 ###                 'likes_count':likes_count, 'comments_count':comments_count,
 ###                     'shares_count': shares_count, 'urls': urls},
 ###              columns=['engaged_at','pageid','page', 'likes_count','comments_count', 'shares_count', 'urls']
-                )
+ ###               )
 
         #print 'Read: ' + str(df)
 
